@@ -15,14 +15,15 @@ namespace SuperAdventure
     public partial class SuperAdventure : Form
     {
         private Player _player;
+        private Monster _currentMonster;
 
         public SuperAdventure()
         {
             InitializeComponent();
 
-            Location location = new Location(1, "Home", "This is your house");
-
             _player = new Player(10,10,20,0,1);
+            MoveTo(World.LocationByID(World.LOCATION_ID_HOME));
+            _player.Inventory.Add(new InventoryItem(World.ItemByID(World.ITEM_ID_RUSTY_SWORD), 1));
 
             lblHitPoints.Text = _player.CurrentHitPoints.ToString();
             lblGold.Text = _player.Gold.ToString();
@@ -32,20 +33,25 @@ namespace SuperAdventure
 
         private void btnNorth_Click(object sender, EventArgs e)
         {
-
+            MoveTo(_player.CurrentLocation.LocationToNorth);
         }
 
         private void btnSouth_Click(object sender, EventArgs e)
         {
-
+            MoveTo(_player.CurrentLocation.LocationToSouth);
         }
 
         private void btnWest_Click(object sender, EventArgs e)
         {
-
+            MoveTo(_player.CurrentLocation.LocationToWest);
         }
 
         private void btnEast_Click(object sender, EventArgs e)
+        {
+            MoveTo(_player.CurrentLocation.LocationToEast);
+        }
+
+        private void MoveTo(Location newLocation)
         {
 
         }
